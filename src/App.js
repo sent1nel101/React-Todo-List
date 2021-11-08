@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+// import Header from './components/Header';
+import Form from './components/Form';
+import FormList from './components/FormList';
+import {useState} from 'react'
 
-function App() {
+function App() { 
+    const [contacts, setContacts] = useState(["andy warhol", "samantha fox", "gustavo batista"])
+    const [text, setText] = useState("")
+  function handleSubmit (e) {
+        e.preventDefault()
+        {text !== "" && setContacts([...contacts, text])}
+        setText("")
+    }
+    const handleChange = (e, props)=>{
+        setText(e.target.value)
+    }  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <h1>Darec's Contact List</h1>
+    <Form onSubmit={handleSubmit} onChange={handleChange}/>
+    <FormList data={contacts} />
     </div>
   );
 }
